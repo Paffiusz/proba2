@@ -56,33 +56,33 @@ synch_RXD: synchronizer
 process(clk_i)
 
 
-	begin
-		if rising_edge(clk_i) then
-			d_ready<=t_ready;
-			if q = waiting then
-
-				led<='0';
-				if sync_RXD = '0' then
-					q := push;
-					t_ready<='0';
-				end if;
-				
-			elsif q = push then
-				push_count<=push_count+1;
-				if push_count = 2604 then
-					q := input;
-					rst_c<='0';
-				end if;
-				
-			elsif q = input then
-				led<='1';
-				push_count <= 0;
-				if count = 10 then
-					q:=waiting;
-					t_ready<='1';
-					rst_c<='1';
-					rs_data_o<=rs_word( 7 downto 0);
-				end if;
+--	begin
+--		if rising_edge(clk_i) then
+--			d_ready<=t_ready;
+--			if q = waiting then
+--
+--				led<='0';
+--				if sync_RXD = '0' then
+--					q := push;
+--					t_ready<='0';
+--				end if;
+--				
+--			elsif q = push then
+--				push_count<=push_count+1;
+--				if push_count = 2604 then
+--					q := input;
+--					rst_c<='0';
+--				end if;
+--				
+--			elsif q = input then
+--				led<='1';
+--				push_count <= 0;
+--				if count = 10 then
+--					q:=waiting;
+--					t_ready<='1';
+--					rst_c<='1';
+--					rs_data_o<=rs_word( 7 downto 0);
+--				end if;
 				
 			end if;
 		end if;
